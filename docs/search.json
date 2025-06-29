@@ -28,6 +28,13 @@
     "text": "knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)\nsuppressPackageStartupMessages({\nlibrary(rgbif)\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(ggplot2)\nlibrary(ggpubr)\nlibrary(viridis)\nlibrary(sf)\nlibrary(geobr)\nlibrary(vegan)\nlibrary(knitr)\nlibrary(leaflet)\n})"
   },
   {
+    "objectID": "coleta.html#fonte-de-dados",
+    "href": "coleta.html#fonte-de-dados",
+    "title": "Formigas pelo Brasil",
+    "section": "Fonte de dados",
+    "text": "Fonte de dados\nOs dados utilizados neste estudo foram obtidos por meio da função occ_download_get() do pacote rgbif no R, acessando diretamente a base de dados da Global Biodiversity Information Facility (GBIF). Foi realizado um download contendo exclusivamente registros de ocorrência da família Formicidae, totalizando 52.059 registros brutos.\n\nocc_download_wait('0054387-250525065834625')\n\n&lt;&lt;gbif download metadata&gt;&gt;\n  Status: SUCCEEDED\n  DOI: 10.15468/dl.5hksr5\n  Format: SIMPLE_CSV\n  Download key: 0054387-250525065834625\n  Created: 2025-06-18T14:31:33.117+00:00\n  Modified: 2025-06-18T14:37:51.920+00:00\n  Download link: https://api.gbif.org/v1/occurrence/download/request/0054387-250525065834625.zip\n  Total records: 52059\n\ndados_formigas &lt;- occ_download_get(\"0054387-250525065834625\", overwrite = TRUE) %&gt;%\n  occ_download_import()"
+  },
+  {
     "objectID": "coleta.html#tratamento-e-filtragem",
     "href": "coleta.html#tratamento-e-filtragem",
     "title": "Formigas pelo Brasil",

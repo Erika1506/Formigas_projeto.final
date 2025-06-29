@@ -17,7 +17,7 @@ library(leaflet)
 })
 ```
 
-### Fonte de dados
+## Fonte de dados
 
 Os dados utilizados neste estudo foram obtidos por meio da função `occ_download_get()` do pacote `rgbif` no R, acessando diretamente a base de dados da **Global Biodiversity Information Facility (GBIF)**. Foi realizado um download contendo exclusivamente registros de ocorrência da família **Formicidae**, totalizando 52.059 registros brutos.
 
