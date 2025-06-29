@@ -1,7 +1,3 @@
-## Resultados
-
-A base de dados analisada continha **ocorrências da família Formicidae no Brasil** obtidas via *GBIF* utilizando o pacote `rgbif`, filtradas para conter apenas registros com informações válidas de gênero, estado e coordenadas geográficas. Após o cruzamento espacial com o shapefile dos biomas brasileiros, foi possível associar os pontos de coleta às regiões ecológicas correspondentes.
-
 ### Distribuição de registros e riqueza de gêneros
 
 Inicialmente, foi avaliado o número de registros e a riqueza de gêneros por estado e por bioma. Observou-se que estados como São Paulo, Minas Gerais, Pará e Amazonas concentraram tanto altos números de registros quanto maior riqueza de gêneros. No entanto, essa distribuição pode refletir um viés amostral, já que regiões com maior atividade de pesquisa e infraestrutura tendem a apresentar mais registros.

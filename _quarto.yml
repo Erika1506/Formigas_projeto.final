@@ -17,9 +17,9 @@ website:
         text: "<i class='bi bi-folder-symlink-fill'></i> COLETA DOS DADOS"
       - href: analise.qmd
         text: "<i class='bi bi-graph-up'></i> ANÁLISES"
-      - href: resultados.qmd
+      - href: resultado.qmd
         text: "<i class='bi bi-bar-chart-line-fill'></i> RESULTADOS"
-      - href: conclusao.qmd
+      - href: conclusão.qmd
         text: "<i class='bi bi-check2-circle'></i> CONCLUSÃO"
 
 format:
