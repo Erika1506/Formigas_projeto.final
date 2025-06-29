@@ -1,0 +1,11 @@
+::: {style="text-align: center; font-size: 2em; font-weight: bold; margin-bottom: 20px;"}
+## Sobre o projeto
+:::
+
+Este site foi criado como parte da avaliação final da disciplina **FIP 606 – Análise e Visualização de Dados em Fitopatologia**, ministrada pelo professor **Emerson Del Ponte** na Universidade Federal de Viçosa (UFV).
+
+O trabalho foi desenvolvido por **Erika Carvalho** e **Julia Golçalves**, com foco na análise da **riqueza e composição de gêneros de formigas no Brasil** utilizando dados públicos disponíveis no **GBIF** (Global Biodiversity Information Facility).
+
+Ainda que nossas linhas de pesquisa sejam voltadas à morfologia de formigas, nesta disciplina nos dedicamos ao uso de ferramentas estatísticas e de visualização interativa para explorar padrões espaciais de biodiversidade.
+
+Esperamos que os resultados apresentados aqui contribuam para uma melhor compreensão da distribuição das formigas no Brasil e sirvam de base para futuras investigações e decisões ambientais.

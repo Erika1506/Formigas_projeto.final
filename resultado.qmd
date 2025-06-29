@@ -1,0 +1,31 @@
+## Resultados
+
+A base de dados analisada continha **ocorrências da família Formicidae no Brasil** obtidas via *GBIF* utilizando o pacote `rgbif`, filtradas para conter apenas registros com informações válidas de gênero, estado e coordenadas geográficas. Após o cruzamento espacial com o shapefile dos biomas brasileiros, foi possível associar os pontos de coleta às regiões ecológicas correspondentes.
+
+### Distribuição de registros e riqueza de gêneros
+
+Inicialmente, foi avaliado o número de registros e a riqueza de gêneros por estado e por bioma. Observou-se que estados como São Paulo, Minas Gerais, Pará e Amazonas concentraram tanto altos números de registros quanto maior riqueza de gêneros. No entanto, essa distribuição pode refletir um viés amostral, já que regiões com maior atividade de pesquisa e infraestrutura tendem a apresentar mais registros.
+
+### Correlação entre número de registros e riqueza de gêneros
+
+Essa suspeita de viés foi confirmada pela análise de correlação de Pearson (r = 0,71; p \< 0,001), que indicou uma forte correlação positiva entre o número de registros por estado e o número de gêneros observados. Isso sugere que parte da riqueza detectada pode estar inflada em áreas mais amostradas, confirmando a hipótese H1.
+
+### Comparação da riqueza de gêneros entre biomas
+
+Para verificar se há variação significativa de riqueza entre os biomas brasileiros (H2), foi realizado um teste de Kruskal-Wallis. O resultado (p = 0,31) não indicou diferenças estatisticamente significativas, possivelmente devido à alta variabilidade no número de registros entre biomas. Isso reforça a necessidade de controle por esforço amostral nas comparações de diversidade.
+
+### Rarefação para controle de esforço amostral
+
+Com base nisso, foi realizada a análise de rarefação utilizando o pacote `{vegan}`. A rarefação estimou a riqueza esperada de gêneros se todos os biomas tivessem o mesmo número de registros. Os resultados mostraram que, mesmo após esse controle, a Amazônia e a Mata Atlântica se destacam com maior riqueza esperada, sugerindo que esses biomas são realmente mais diversos em termos de gêneros de formigas, independentemente do esforço amostral.
+
+### Gêneros mais frequentes por bioma
+
+A análise dos gêneros mais frequentes em cada bioma revelou que **Pheidole**, **Camponotus** e **Solenopsis** estão entre os mais registrados. Essas formigas são amplamente reconhecidas como gêneros generalistas, altamente adaptáveis e com ampla distribuição geográfica, corroborando a hipótese H3. Sua presença dominante em diferentes biomas sugere elevada tolerância a variações ambientais, capacidade de nidificação variada e dietas onívoras. Tais características ecológicas favorecem sua ocorrência mesmo em ambientes antropizados.
+
+### Gêneros exclusivos por bioma
+
+Por outro lado, também foram identificados gêneros exclusivos em cada bioma, como ocorreu na Caatinga e no Cerrado, onde certos gêneros ocorreram apenas nessas regiões. Apesar de menos frequentes, esses registros são ecologicamente relevantes, pois apontam para possíveis endemismos ou adaptação a condições ambientais mais específicas. A presença de gêneros exclusivos pode indicar que, mesmo biomas com menor riqueza geral, ainda possuem componentes únicos da fauna de formigas que merecem atenção em ações de conservação.
+
+### Associação entre gêneros e estados
+
+O teste de qui-quadrado (χ² = 79511; p \< 0,001, com simulação) demonstrou que a distribuição dos gêneros entre os estados não é aleatória. Isso reforça que fatores regionais — como clima, vegetação, altitude ou histórico de coleta — influenciam fortemente a composição taxonômica de cada estado. O resultado complementa a análise dos gêneros frequentes e exclusivos, demonstrando que diferentes estados (e biomas) abrigam conjuntos distintos de formigas, tanto por fatores ecológicos quanto por desigualdade no esforço amostral.

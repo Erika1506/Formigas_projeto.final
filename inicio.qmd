@@ -1,0 +1,17 @@
+## Introdução
+
+::::: columns
+::: {.column width="55%"}
+As formigas (Formicidae) são insetos amplamente distribuídos e desempenham papéis ecológicos essenciais, como predação, dispersão de sementes e decomposição. Sua diversidade é especialmente elevada nos trópicos, sendo o Brasil um dos países com maior riqueza de gêneros.
+
+Diante disso, este trabalho teve como objetivo analisar a riqueza e a composição de gêneros de formigas no Brasil com base em dados do GBIF, considerando sua distribuição por estado e bioma. Para isso, testamos três hipóteses:
+
+-   **H1**: existe correlação positiva entre número de registros e riqueza de gêneros por estado;
+-   **H2**: a riqueza de gêneros varia entre os biomas brasileiros;
+-   **H3**: os gêneros mais frequentes por bioma são generalistas com ampla distribuição ecológica.
+:::
+
+::: {.column width="45%"}
+![](img/formiga.jpg){fig-align="center" width="100%"}
+:::
+:::::

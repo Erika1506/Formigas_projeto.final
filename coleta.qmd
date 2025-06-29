@@ -1,0 +1,125 @@
+### Pacotes utilizados
+
+```{r}
+library(readxl)
+library(ggplot2)
+library(dplyr)
+library(nortest)
+library(car)
+library(ggpubr)
+library(sf)
+library(geobr)
+library(DescTools)  
+library(rgbif)
+library(ggrepel)
+library(viridis)
+library(pheatmap)
+library(tibble)
+library(tidyr)
+library(vegan)
+library(knitr)
+library(leaflet)
+library(sf)
+```
+
+### Fonte de dados
+
+Os dados utilizados neste estudo foram obtidos por meio da função `occ_download_get()` do pacote `rgbif` no R, acessando diretamente a base de dados da **Global Biodiversity Information Facility (GBIF)**. Foi realizado um download contendo exclusivamente registros de ocorrência da família **Formicidae**, totalizando 52.059 registros brutos.
+
+```{r}
+dados_formigas <- readRDS("dados_formigas.rds")
+dados_filtrados <- readRDS("dados_formigas.rds")
+```
+
+#### **Padronização dos nomes dos estados e remoção de dados** {.tabset}
+
+```{r}
+padroniza_estado <- function(estado) {
+  estado <- tolower(estado)
+  estado <- gsub("ã", "a", estado)
+  estado <- gsub("á", "a", estado)
+  estado <- gsub("ă", "a", estado)
+  estado <- gsub("â", "a", estado)
+  estado <- gsub("é", "e", estado)
+  estado <- gsub("ê", "e", estado)
+  estado <- gsub("í", "i", estado)
+  estado <- gsub("ó", "o", estado)
+  estado <- gsub("ô", "o", estado)
+  estado <- gsub("ú", "u", estado)
+  estado <- gsub("ç", "c", estado)
+  estado <- trimws(estado)
+
+  if (estado %in% c("amapa", "amapá")) return("Amapá")
+  if (estado %in% c("amazonas", "state of amazonas", "manaus")) return("Amazônas")
+  if (estado %in% c("ce", "ceara", "ceará")) return("Ceará")
+  if (estado %in% c("df", "distrito federal", "federal district")) return("Distrito Federal")
+  if (estado %in% c("espirito santo", "espírito santo", "esp�rito santo")) return("Espírito Santo")
+  if (estado %in% c("estado de sao paulo", "sp", "sao paulo", "são paulo", "s�o paulo", "sao paulo ", "Săo paulo")) return("São Paulo")
+  if (estado %in% c("goias", "goiás", "goi�s")) return("Goiás")
+  if (estado %in% c("maranhao", "maranhão")) return("Maranhão")
+  if (estado %in% c("mato grosso", "matto grasso")) return("Mato Grosso")
+  if (estado %in% c("mato grosso do sul", "matto grasso do sul", "morraria do sul")) return("Mato Grosso do Sul")
+  if (estado %in% c("mg", "minas gerais", "minas gerias")) return("Minas Gerais")
+  if (estado %in% c("para", "pará", "par�")) return("Pará")
+  if (estado %in% c("paraiba", "paraíba")) return("Paraíba")
+  if (estado %in% c("parana", "paraná", "paranã", "paran�")) return("Paraná")
+  if (estado %in% c("piaui", "piauí")) return("Piauí")
+  if (estado %in% c("rio de janeiro", "rio janeiro", "rio de janeira")) return("Rio de Janeiro")
+  if (estado %in% c("rondonia", "rondônia", "rond�nia", "rodonia", "rondónia")) return("Rondônia")
+  if (estado %in% c("santa catarina", "santa catarina (catharina)")) return("Santa Catarina")
+  if (estado %in% c("tocantins", "to")) return("Tocantins")
+
+  return(paste0(toupper(substring(estado, 1, 1)), substring(estado, 2)))
+}
+
+# 2. Criar a tabela já com estado corrigido direto
+dados_filtrados <- dados_formigas %>%
+  select(genero, estado, latitude, longitude) %>%
+  filter(!is.na(genero), !is.na(estado),
+         !is.na(latitude), !is.na(longitude)) %>%
+  mutate(estado = sapply(estado, padroniza_estado)) %>%
+  rename(
+    genero = genero,
+    estado = estado,
+    latitude = latitude,
+    longitude = longitude
+  )
+
+#Criar um novo objeto só com registros que têm estado informado
+dados_com_estado <- dados_filtrados %>%
+  filter(
+    !is.na(estado),               # exclui valores NA
+    estado != "",                 # exclui strings vazias
+    estado != " ",                # exclui strings com espaço
+    !grepl("Nao informado", estado, ignore.case = TRUE)  # exclui "não informado" em qualquer caixa
+  )
+```
+
+#### **Remoção de registros com gênero ausente** {.tabset}
+
+```{r}
+dados_validos <- dados_com_estado %>%
+  filter(!is.na(genero), genero != "", genero != " ")
+```
+
+#### **Conversão espacial e associação com biomas** {.tabset}
+
+Os registros com coordenadas geográficas foram convertidos para objetos espaciais com o pacote `sf`, e posteriormente associados aos biomas brasileiros utilizando o shapefile oficial de biomas do Brasil (IBGE 2019), acessado via pacote `geobr`.
+
+```{r}
+# Baixar o shapefile de biomas
+biomas <- read_biomes(year = 2019)
+
+# Transformar os dados em objeto espacial (geográfico)
+dados_sf <- st_as_sf(dados_validos,
+                     coords = c("longitude", "latitude"),
+                     crs = 4326)
+
+# Transformar os biomas para o mesmo CRS
+biomas <- st_transform(biomas, crs = 4326)
+
+# Juntar os dados com os biomas por interseção espacial
+dados_com_bioma <- st_join(dados_sf, biomas["name_biome"]) %>%
+  filter(!is.na(name_biome)) %>%
+  rename(bioma = name_biome)
+```
