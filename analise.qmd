@@ -1,27 +1,25 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
 ### Pacotes utilizados
 
 ```{r}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 suppressPackageStartupMessages({
-library(readxl)
-library(ggplot2)
 library(dplyr)
-library(nortest)
-library(car)
-library(ggpubr)
-library(sf)
-library(geobr)
-library(DescTools)  
-library(rgbif)
-library(ggrepel)
-library(viridis)
-library(pheatmap)
-library(tibble)
+library(ggplot2)
+library(ggpubr)   
 library(tidyr)
-library(vegan)
-library(knitr)
 library(leaflet)
-library(sf) })
+library(geobr)        
+library(sf)
+library(vegan)
+library(stats)
+library(knitr)
+library(kableExtra)})
 ```
 
 ## Análises descritivas {.tabset}

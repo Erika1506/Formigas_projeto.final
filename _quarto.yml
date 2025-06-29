@@ -10,7 +10,7 @@ website:
     pinned: true
     left:
       - href: index.qmd
-        text: "<i class='bi bi-info-circle-fill'></i> APRESENTAÇÃP"
+        text: "<i class='bi bi-info-circle-fill'></i> APRESENTAÇÃO"
       - href: inicio.qmd
         text: "<i class='bi bi-house-door-fill'></i> INÍCIO"
       - href: coleta.qmd

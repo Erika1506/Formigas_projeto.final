@@ -1,25 +1,20 @@
 ### Pacotes utilizados
 
 ```{r}
-library(readxl)
-library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+suppressPackageStartupMessages({
+library(rgbif)
 library(dplyr)
-library(nortest)
-library(car)
+library(tidyr)
+library(ggplot2)
 library(ggpubr)
+library(viridis)
 library(sf)
 library(geobr)
-library(DescTools)  
-library(rgbif)
-library(ggrepel)
-library(viridis)
-library(pheatmap)
-library(tibble)
-library(tidyr)
 library(vegan)
 library(knitr)
 library(leaflet)
-library(sf)
+})
 ```
 
 ### Fonte de dados
@@ -27,8 +22,29 @@ library(sf)
 Os dados utilizados neste estudo foram obtidos por meio da função `occ_download_get()` do pacote `rgbif` no R, acessando diretamente a base de dados da **Global Biodiversity Information Facility (GBIF)**. Foi realizado um download contendo exclusivamente registros de ocorrência da família **Formicidae**, totalizando 52.059 registros brutos.
 
 ```{r}
-dados_formigas <- readRDS("dados_formigas.rds")
-dados_filtrados <- readRDS("dados_formigas.rds")
+occ_download_wait('0054387-250525065834625')
+
+dados_formigas <- occ_download_get("0054387-250525065834625", overwrite = TRUE) %>%
+  occ_download_import()
+```
+
+## Tratamento e filtragem
+
+#### **Seleção das variáveis relevantes**:
+
+Foram mantidas apenas as colunas com informações sobre o gênero (`genus`), estado (`stateProvince`) e coordenadas geográficas (`decimalLatitude`, `decimalLongitude`) e registros com qualquer campo `NA` nas colunas selecionadas foram excluídos.
+
+```{r}
+dados_filtrados <- dados_formigas %>%
+  select(genus, stateProvince, decimalLatitude, decimalLongitude) %>%
+  filter(!is.na(genus), !is.na(stateProvince),
+         !is.na(decimalLatitude), !is.na(decimalLongitude)) %>%
+  rename(
+    genero = genus,
+    estado = stateProvince,
+    latitude = decimalLatitude,
+    longitude = decimalLongitude
+  )
 ```
 
 #### **Padronização dos nomes dos estados e remoção de dados** {.tabset}
@@ -74,24 +90,24 @@ padroniza_estado <- function(estado) {
 
 # 2. Criar a tabela já com estado corrigido direto
 dados_filtrados <- dados_formigas %>%
-  select(genero, estado, latitude, longitude) %>%
-  filter(!is.na(genero), !is.na(estado),
-         !is.na(latitude), !is.na(longitude)) %>%
-  mutate(estado = sapply(estado, padroniza_estado)) %>%
+  select(genus, stateProvince, decimalLatitude, decimalLongitude) %>%
+  filter(!is.na(genus), !is.na(stateProvince),
+         !is.na(decimalLatitude), !is.na(decimalLongitude)) %>%
+  mutate(stateProvince = sapply(stateProvince, padroniza_estado)) %>%
   rename(
-    genero = genero,
-    estado = estado,
-    latitude = latitude,
-    longitude = longitude
+    genero = genus,
+    estado = stateProvince,
+    latitude = decimalLatitude,
+    longitude = decimalLongitude
   )
 
 #Criar um novo objeto só com registros que têm estado informado
 dados_com_estado <- dados_filtrados %>%
   filter(
-    !is.na(estado),               # exclui valores NA
-    estado != "",                 # exclui strings vazias
-    estado != " ",                # exclui strings com espaço
-    !grepl("Nao informado", estado, ignore.case = TRUE)  # exclui "não informado" em qualquer caixa
+    !is.na(estado),               
+    estado != "",                
+    estado != " ",                
+    !grepl("Nao informado", estado, ignore.case = TRUE) 
   )
 ```
 
