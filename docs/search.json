@@ -18,7 +18,7 @@
     "href": "index.html",
     "title": "Formigas pelo Brasil",
     "section": "",
-    "text": "Este site foi criado como parte da avaliação final da disciplina FIP 606 – Análise e Visualização de Dados em Fitopatologia, ministrada pelo professor Emerson Del Ponte na Universidade Federal de Viçosa (UFV).\nO trabalho foi desenvolvido por Erika Carvalho e Julia Golçalves, com foco na análise da riqueza e composição de gêneros de formigas no Brasil utilizando dados públicos disponíveis no GBIF (Global Biodiversity Information Facility).\nAinda que nossas linhas de pesquisa sejam voltadas à morfologia de formigas, nesta disciplina nos dedicamos ao uso de ferramentas estatísticas e de visualização interativa para explorar padrões espaciais de biodiversidade.\nEsperamos que os resultados apresentados aqui contribuam para uma melhor compreensão da distribuição das formigas no Brasil e sirvam de base para futuras investigações e decisões ambientais."
+    "text": "Este site foi criado como parte da avaliação final da disciplina FIP 606 – Análise e Visualização de Dados em Fitopatologia, ministrada pelo professor Emerson Del Ponte na Universidade Federal de Viçosa (UFV).\nO trabalho foi desenvolvido por Erika Carvalho e Julia Gonçalves, com foco na análise da riqueza e composição de gêneros de formigas no Brasil, utilizando dados públicos disponibilizados pelo GBIF (Global Biodiversity Information Facility).\nNesta proposta, utilizamos ferramentas estatísticas e de visualização interativa para explorar padrões espaciais da biodiversidade de formigas."
   },
   {
     "objectID": "coleta.html",
