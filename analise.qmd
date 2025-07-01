@@ -1,9 +1,3 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-
 ### Pacotes utilizados
 
 ```{r}
@@ -114,7 +108,7 @@ leaflet(estados_mapa) %>%
 
 Nesta etapa, buscamos identificar quais gêneros de formigas são mais abundantes e como eles se distribuem entre os estados e biomas brasileiros. Também verificamos a presença de gêneros exclusivos em determinadas regiões.
 
--   **Gêneros mais frequentes por bioma** {.tabset}
+-   **Gêneros mais frequentes por bioma**
 
 Selecionamos os três gêneros com maior número de registros em cada bioma, com o objetivo de identificar quais grupos são ecologicamente dominantes.
 
@@ -135,7 +129,7 @@ ggplot(top3_generos_bioma, aes(x = reorder(bioma, -n), y = n, fill = genero)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-#### **Gêneros exclusivos por bioma** {.tabset}
+-   **Gêneros exclusivos por bioma**
 
 A seguir, identificamos os gêneros que ocorrem exclusivamente em um único bioma. Isso é relevante para revelar padrões de endemismo, especialização ecológica ou até limitações do esforço amostral em determinadas regiões.
 

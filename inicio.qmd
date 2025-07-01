@@ -12,6 +12,6 @@ Diante disso, este trabalho teve como objetivo analisar a riqueza e a composi√ß√
 :::
 
 ::: {.column width="45%"}
-![](formigas1.png){fig-align="center" width="590"}
+![](images/formigas1.png){fig-align="center"}
 :::
 :::::
