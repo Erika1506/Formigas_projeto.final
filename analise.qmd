@@ -18,11 +18,11 @@ library(kableExtra)})
 
 ## Análises descritivas {.tabset}
 
-#### **Distribuição de riqueza de gêneros de formigas** {.tabset}
+#### **Distribuição e riqueza de gêneros de formigas** {.tabset}
 
 Nesta etapa, avaliamos como a diversidade de gêneros de formigas se distribui geograficamente no Brasil, utilizando recortes por estado e bioma.
 
--   Número de registros por estado (`registros_estado`) {.tabset}
+-   **Número de registros por estado** (`registros_estado`)
 
 Foi calculada a quantidade total de registros de formigas por estado, o que permite identificar onde há maior volume de dados disponíveis.
 
@@ -32,7 +32,7 @@ registros_estado <- dados_com_bioma %>%
   count(estado, name = "n_registros")
 ```
 
-#### **Número de gêneros por estado (`generos_estado`)** {.tabset}
+-   **Número de gêneros por estado** (`generos_estado`)
 
 Aqui contamos quantos gêneros distintos foram registrados em cada estado, com o objetivo de mapear a diversidade registrada regionalmente.
 
@@ -42,7 +42,7 @@ generos_estado <- dados_com_bioma %>%
   count(estado, name = "riqueza_generos")
 ```
 
-#### **Número de gêneros por bioma (`generos_bioma`)** {.tabset}
+-   **Número de gêneros por bioma** (`generos_bioma`)
 
 Essa análise permitiu comparar a riqueza de gêneros entre os diferentes biomas brasileiros, destacando regiões ecologicamente distintas com maior ou menor diversidade.
 
